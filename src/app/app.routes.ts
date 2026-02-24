@@ -1,24 +1,19 @@
 import { Routes } from '@angular/router';
-import { Login } from './features/auth/login/login';
-import { Register } from './features/auth/register/register';
+import { Auth } from './features/auth/auth/auth';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
   {
-    path: 'login',
-    component: Login,
-  },
-  {
-    path: 'register',
-    component: Register,
+    path: 'auth',
+    component: Auth,
   },
 
   {
     path: '**',
-    redirectTo: 'login',
+    redirectTo: 'auth',
   },
 ];
