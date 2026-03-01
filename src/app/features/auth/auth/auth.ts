@@ -41,37 +41,6 @@ export class Auth {
     this.errorMessage = '';
   }
 
-  // submitLogin() {
-  //   if (this.loginForm.invalid) {
-  //     this.loginForm.markAllAsTouched();
-  //     return;
-  //   }
-
-  //   this.loading = true;
-  //   this.authService.login(this.loginForm.value).subscribe({
-  //     next: (res: any) => {
-  //       localStorage.setItem('token', res.token);
-
-  //       if (res.user && res.user.role) {
-  //         const role = res.user.role.toLowerCase(); // normalize to lowercase
-  //         localStorage.setItem('role', role);
-  //       } else {
-  //         localStorage.setItem('role', 'user'); // fallback
-  //       }
-
-  //       const roleStored = localStorage.getItem('role');
-  //       this.router.navigate([roleStored === 'admin' ? '/admin' : '/client']);
-  //       console.log('router success')
-
-  //       this.loading = false;
-  //     },
-  //     error: (err) => {
-  //       this.errorMessage = err.error?.message || 'Login Failed';
-  //       this.loading = false;
-  //     },
-  //   });
-  // }
-
   submitLogin() {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
@@ -81,7 +50,7 @@ export class Auth {
     this.loading = true;
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (res: any) => {
+      next: (res: any) => {        
         localStorage.setItem('token', res.token);
 
         if (!res.role) {

@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Avatar } from '../../../../shared/components/avatar/avatar';
 
 @Component({
   selector: 'app-header',
-  imports: [],
+  imports: [Avatar],
   templateUrl: './header.html',
   styleUrl: './header.css',
 })
-export class Header {
+export class Header implements OnInit {
+  fullname: string = '';
 
+  ngOnInit(): void {
+    const storedName = localStorage.getItem('fullname');
+    this.fullname = storedName ? storedName : '';
+  }
 }

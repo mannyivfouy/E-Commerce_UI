@@ -1,0 +1,14 @@
+.admin-wrapper {
+  min-height: 100vh;
+  background-color: #f5f6fa;
+}
+
+.main-content {
+  flex-grow: 1;
+}
+
+.content {
+  background: #f5f6fa;
+  min-height: calc(100vh - 80px);
+  font-family: 'Segoe UI', sans-serif;
+}
