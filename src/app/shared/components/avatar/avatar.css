@@ -4,10 +4,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 10px; /* square with soft corners */
+  border-radius: 10px;
   font-weight: bold;
   font-size: 18px;
   color: white;
-  text-transform: uppercase;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;  
 }

@@ -16,7 +16,7 @@ export class Avatar implements OnInit {
     this.gradientBackground = this.getGradient();
   }
 
-  private getInitials(name: string): string {
+  getInitials(name: string): string {
     return name
       .trim()
       .split(' ')
@@ -24,13 +24,13 @@ export class Avatar implements OnInit {
       .join('');
   }
 
-  private getGradient(): string {
+  getGradient(): string {
     const color1 = this.stringToColor(this.fullName);
     const color2 = this.stringToColor(this.fullName + 'gradient');
-    return `linear-gradient(135deg, ${color1}, ${color2})`;
+    return `linear-gradient(165deg, ${color1}, ${color2})`;
   }
 
-  private stringToColor(str: string): string {
+  stringToColor(str: string): string {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);

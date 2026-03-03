@@ -28,6 +28,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('fullname');
+    localStorage.removeItem('role');
   }
 
   getToken(): string | null {
