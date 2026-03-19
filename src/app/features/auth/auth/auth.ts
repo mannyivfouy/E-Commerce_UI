@@ -50,7 +50,7 @@ export class Auth {
     this.loading = true;
 
     this.authService.login(this.loginForm.value).subscribe({
-      next: (res: any) => {        
+      next: (res: any) => {
         localStorage.setItem('token', res.token);
 
         if (!res.role) {
@@ -84,6 +84,8 @@ export class Auth {
       next: (res: any) => {
         this.isLoginMode = true;
         this.loading = false;
+
+        this.router.navigate(['/client']);
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login Failed';

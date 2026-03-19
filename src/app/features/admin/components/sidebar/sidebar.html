@@ -1,25 +1,34 @@
-<div class="sidebar bg-dark text-white p-4">
-  <h3 class="text-center mb-4">E-Commerce</h3>
-  <ul class="nav flex-column">
-    <li class="nav-item mb-2">
+<div class="sidebar bg-dark text-white p-3 d-flex flex-column">
+  <div class="logo mb-3 d-flex justify-content-center">
+    <img src="assets/images/logo.png" alt="logo" />
+  </div>
+
+  <ul class="nav nav-pills flex-column gap-2 flex-grow-1">
+    <li class="nav-item">
       <a routerLink="/admin/dashboard" routerLinkActive="active" class="nav-link text-white">
-        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+        <i class="bi bi-grid-fill me-2"></i> Dashboard
       </a>
     </li>
-    <li class="nav-item mb-2">
+    <li class="nav-item">
       <a routerLink="/admin/users" routerLinkActive="active" class="nav-link text-white">
-        <i class="bi bi-people me-2"></i> Users
+        <i class="bi bi-people-fill me-2"></i> Users
       </a>
     </li>
-    <li class="nav-item mb-2">
+    <li class="nav-item">
       <a routerLink="/admin/products" routerLinkActive="active" class="nav-link text-white">
-        <i class="bi bi-box me-2"></i> Products
+        <i class="bi bi-box-fill me-2"></i> Products
       </a>
     </li>
-    <li class="nav-item mb-2">
+    <li class="nav-item">
       <a routerLink="/admin/settings" routerLinkActive="active" class="nav-link text-white">
-        <i class="bi bi-gear me-2"></i> Categories
+        <i class="bi bi-tag-fill me-2"></i> Categories
       </a>
     </li>
   </ul>
+
+  <div class="">
+    <a (click)="logout()" class="nav-link text-white bg-danger">
+      <i class="bi bi-box-arrow-left me-2"></i> Logout
+    </a>
+  </div>
 </div>

@@ -19,3 +19,7 @@
   color: white !important;
   box-shadow: 0 4px 10px rgba(79, 70, 229, 0.2);
 }
+
+.logo {
+  height: 60px;
+}

@@ -23,7 +23,12 @@ export class AuthService {
   }
 
   register(data: { fullname: string; email: string; password: string }): Observable<any> {
-    return this.http.post(`${this.apiUrl}/auth/register`, data);
+    return this.http.post(`${this.apiUrl}/auth/register`, data).pipe(
+      tap((res: any) => {
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('fullname', res.fullname);
+      }),
+    );
   }
 
   logout() {
