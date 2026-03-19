@@ -25,21 +25,20 @@ export class Avatar implements OnInit {
   }
 
   getGradient(): string {
-    const color1 = this.stringToColor(this.fullName);
-    const color2 = this.stringToColor(this.fullName + 'gradient');
-    return `linear-gradient(165deg, ${color1}, ${color2})`;
+    const hue = this.getHue(this.fullName);
+    const hue2 = (hue + 30) % 360; // small shift for gradient
+
+    return `linear-gradient(135deg,
+    hsl(${hue}, 70%, 60%),
+    hsl(${hue2}, 70%, 50%)
+  )`;
   }
 
-  stringToColor(str: string): string {
+  getHue(str: string): number {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
-    let color = '#';
-    for (let i = 0; i < 3; i++) {
-      const value = (hash >> (i * 8)) & 0xff;
-      color += ('00' + value.toString(16)).slice(-2);
-    }
-    return color;
+    return Math.abs(hash) % 360;
   }
 }
