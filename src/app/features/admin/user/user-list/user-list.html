@@ -1,1 +1,44 @@
-<p>user-list works!</p>
+<div class="card modern-table">
+  <div class="card-body p-0">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center p-3 border-bottom">
+      <h5 class="mb-0">Users</h5>
+      <input class="form-control w-25" placeholder="Search..." />
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table class="table align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th class="text-end">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>John</td>
+            <td>john@mail.com</td>
+            <td><span class="badge bg-success-subtle text-success">Active</span></td>
+            <td class="text-end">
+              <button class="btn btn-sm btn-light">Edit</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Footer -->
+    <div class="d-flex justify-content-between align-items-center p-3 border-top">
+      <small class="text-muted">Showing 1–10</small>
+      <ul class="pagination pagination-sm mb-0">
+        <li class="page-item active"><a class="page-link">1</a></li>
+      </ul>
+    </div>
+  </div>
+</div>

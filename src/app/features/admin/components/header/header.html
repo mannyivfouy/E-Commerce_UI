@@ -1,22 +1,18 @@
-<nav class="navbar bg-white shadow-sm px-3 py-2 modern-header">
-  <span class="navbar-brand mb-0 h5">Admin Panel</span>
-  <div class="d-flex align-items-center">
+<nav class="modern-header">
+  <span class="navbar-brand">Admin Panel</span>
+
+  <div class="d-flex align-items-center gap-2">
+    <span class="text-muted small">Hi, {{ fullname }}</span>
+
     <div class="dropdown">
-      <a
-        class="d-flex align-items-center text-decoration-none"
-        id="avatarDropdown"
-        href="#"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
+      <a data-bs-toggle="dropdown">
         <app-avatar [fullName]="fullname"></app-avatar>
       </a>
 
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
+      <ul class="dropdown-menu dropdown-menu-end">
         <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
         <li><a class="dropdown-item" routerLink="/settings">Settings</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <!-- <li><a class="dropdown-item" (click)="logout()">Logout</a></li> -->
       </ul>
     </div>
   </div>

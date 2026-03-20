@@ -1,8 +1,47 @@
 .modern-header {
+  height: 70px;
+  padding: 0 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #e0e0e0;
-  font-family: 'Segoe UI', sans-serif;
-  height: 80px;
+
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #f1f3f5;
+
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.navbar-brand {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Avatar hover */
+.dropdown a {
+  padding: 6px;
+  border-radius: 10px;
+  transition: 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* .dropdown a:hover {
+  background: #f8f9fa;
+} */
+
+/* Dropdown */
+.dropdown-menu {
+  border-radius: 12px;
+  border: 1px solid #f1f3f5;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-item {
+  border-radius: 8px;
+}
+
+.dropdown-item:hover {
+  background: #f8f9fa;
 }
