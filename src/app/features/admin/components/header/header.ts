@@ -9,7 +9,6 @@ import { Avatar } from '../../../../shared/components/avatar/avatar';
 })
 export class Header implements OnInit {
   fullname: string = '';
-  currentTime: string = '';
 
   ngOnInit(): void {
     const storedName = localStorage.getItem('fullname');
