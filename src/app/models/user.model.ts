@@ -4,6 +4,7 @@ export interface User {
   email: string;
   password: string;
   role: 'Admin' | 'User';
+  status: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }

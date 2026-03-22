@@ -2,7 +2,7 @@
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">User List</h5>
 
-    <input type="search" name="" id="">
+    <input type="search" name="" id="" />
 
     <button class="btn btn-primary" (click)="openAddForm()">
       <i class="bi bi-person-plus-fill me-2"></i> Add User
@@ -22,6 +22,7 @@
           <th>Role</th>
           <th>Created</th>
           <th>Updated</th>
+          <th>Status</th>
           <th class="">Actions</th>
         </tr>
       </thead>
@@ -37,19 +38,29 @@
           <td>{{ user.fullname }}</td>
           <td>{{ user.email }}</td>
           <td>
-            <span class="badge" [ngClass]="user.role === 'Admin' ? 'bg-danger' : 'bg-secondary'">
+            <span class="badge" [ngClass]="user.role === 'Admin' ? 'bg-danger' : 'bg-light text-muted border'">
               {{ user.role }}
             </span>
           </td>
           <td>{{ user.createdAt | date: 'short' }}</td>
           <td>{{ user.updatedAt | date: 'short' }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="user.status ? 'bg-success' : 'bg-secondary'"
+            >
+              {{ user.status ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
 
           <td class="">
-            <button class="btn btn-warning me-3" (click)="openEditForm(user)">
+            <button class="btn btn-sm btn-warning me-3" (click)="openEditForm(user)">
               <i class="bi bi-pencil-fill me-2"></i> Edit
             </button>
 
-            <button class="btn btn-danger"><i class="bi bi-trash-fill me-2"></i> Delete</button>
+            <button class="btn btn-sm btn-danger">
+              <i class="bi bi-trash-fill me-2"></i> Delete
+            </button>
           </td>
         </tr>
       </tbody>
@@ -59,3 +70,20 @@
     <div *ngIf="!loading && users.length === 0" class="text-center text-muted">No users found</div>
   </div>
 </div>
+
+<ng-container *ngIf="showModal" class="animate__animated animate__fadeInUp">
+  <div class="modal fade show d-block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ selectedUser ? 'Edit User' : 'Add User' }}</h5>
+          <button type="button" class="btn-close" (click)="closeModal()"></button>
+        </div>
+        <div class="modal-body">
+          <app-user-form [user]="selectedUser" (close)="closeModal($event)"></app-user-form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-backdrop fade show"></div>
+</ng-container>
