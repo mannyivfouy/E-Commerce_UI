@@ -1,1 +1,66 @@
-<p>user-form works!</p>
+<form [formGroup]="userForm" (ngSubmit)="saveUser()" class="user-form">
+  <!-- Full Name -->
+  <div class="mb-3">
+    <label class="form-label">Full Name</label>
+    <input type="text" formControlName="fullname" class="form-control rounded-3" />
+    <div
+      class="text-danger mt-1"
+      *ngIf="userForm.get('fullname')?.touched && userForm.get('fullname')?.invalid"
+    >
+      Full Name is required (min 3 characters)
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" formControlName="email" class="form-control rounded-3" />
+    <div
+      class="text-danger mt-1"
+      *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid"
+    >
+      Enter a valid email
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="mb-3" *ngIf="!user">
+    <label class="form-label">Password</label>
+    <input type="password" formControlName="password" class="form-control rounded-3" />
+    <div
+      class="text-danger mt-1"
+      *ngIf="userForm.get('password')?.touched && userForm.get('password')?.invalid"
+    >
+      Password is required (min 6 characters)
+    </div>
+  </div>
+
+  <!-- Role -->
+  <div class="mb-3">
+    <label class="form-label">Role</label>
+    <select formControlName="role" class="form-select rounded-3">
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
+    </select>
+  </div>
+
+  <!-- Status -->
+  <div class="form-check form-switch mb-4">
+    <input class="form-check-input" type="checkbox" formControlName="status" />
+    <label class="form-check-label">Active</label>
+  </div>
+
+  <!-- Buttons -->
+  <div class="d-flex justify-content-end gap-2">
+    <button type="button" class="btn btn-light rounded-3" (click)="cancel()" [disabled]="loading">
+      Cancel
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary rounded-3"
+      [disabled]="loading || userForm.invalid"
+    >
+      {{ loading ? 'Saving...' : user ? 'Update' : 'Create' }}
+    </button>
+  </div>
+</form>

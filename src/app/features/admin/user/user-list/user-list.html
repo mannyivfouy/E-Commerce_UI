@@ -38,17 +38,17 @@
           <td>{{ user.fullname }}</td>
           <td>{{ user.email }}</td>
           <td>
-            <span class="badge" [ngClass]="user.role === 'Admin' ? 'bg-danger' : 'bg-light text-muted border'">
+            <span
+              class="badge"
+              [ngClass]="user.role === 'Admin' ? 'bg-danger' : 'bg-light text-muted border'"
+            >
               {{ user.role }}
             </span>
           </td>
           <td>{{ user.createdAt | date: 'short' }}</td>
           <td>{{ user.updatedAt | date: 'short' }}</td>
           <td>
-            <span
-              class="badge"
-              [ngClass]="user.status ? 'bg-success' : 'bg-secondary'"
-            >
+            <span class="badge" [ngClass]="user.status ? 'bg-success' : 'bg-secondary'">
               {{ user.status ? 'Active' : 'Inactive' }}
             </span>
           </td>
@@ -71,19 +71,27 @@
   </div>
 </div>
 
-<ng-container *ngIf="showModal" class="animate__animated animate__fadeInUp">
-  <div class="modal fade show d-block">
-    <div class="modal-dialog">
-      <div class="modal-content">
+<ng-container *ngIf="showModal">
+  <!-- Modal -->
+  <div class="modal fade show d-block animate__animated animate__fadeInUp">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content shadow-lg rounded-4">
+        <!-- Header -->
         <div class="modal-header">
-          <h5 class="modal-title">{{ selectedUser ? 'Edit User' : 'Add User' }}</h5>
-          <button type="button" class="btn-close" (click)="closeModal()"></button>
+          <h5 class="modal-title">
+            {{ selectedUser ? 'Edit User' : 'Add User' }}
+          </h5>
+          <button type="button" class="btn-close text-denger" (click)="closeModal(null)"></button>
         </div>
+
+        <!-- Body -->
         <div class="modal-body">
-          <app-user-form [user]="selectedUser" (close)="closeModal($event)"></app-user-form>
+          <app-user-form [user]="selectedUser" (close)="closeModal($event)"> </app-user-form>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Backdrop -->
   <div class="modal-backdrop fade show"></div>
 </ng-container>
