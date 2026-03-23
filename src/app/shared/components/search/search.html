@@ -1,0 +1,18 @@
+<div class="position-relative">
+  <input
+    type="text"
+    class="form-control px-4 py-2"
+    placeholder="Search..."
+    [(ngModel)]="searchText"
+    (input)="onTyping()"
+  />
+
+  <!-- Clear button -->
+  <button
+    *ngIf="searchText"
+    class="btn position-absolute top-50 end-0 translate-middle-y me-2"
+    (click)="onClear()"
+  >
+    ✖
+  </button>
+</div>

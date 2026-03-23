@@ -4,10 +4,11 @@ import { UserService } from '../../../../core/services/user-service';
 import { CommonModule } from '@angular/common';
 import { Avatar } from '../../../../shared/components/avatar/avatar';
 import { UserForm } from '../user-form/user-form';
+import { Search } from "../../../../shared/components/search/search";
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, Avatar, UserForm],
+  imports: [CommonModule, Avatar, UserForm, Search],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
@@ -17,6 +18,9 @@ export class UserList implements OnInit {
 
   showModal: boolean = false;
   selectedUser: User | null = null;
+
+  searchTerm: string = '';
+  filteredUser: User[] = [];
 
   constructor(
     private userService: UserService,
@@ -33,6 +37,7 @@ export class UserList implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res;
+        this.filteredUser = res
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -41,6 +46,14 @@ export class UserList implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  onSearch(value: string) {
+    this.searchTerm = value;
+
+    this.filteredUser = this.users.filter((user) =>
+      user.fullname.toLowerCase().includes(value.toLowerCase()),
+    );
   }
 
   openAddForm() {
@@ -76,7 +89,7 @@ export class UserList implements OnInit {
       error: (err) => console.error(err),
     });
   }
-  
+
   updateUser(user: User) {
     if (!this.selectedUser?._id) return;
 
