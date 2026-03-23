@@ -4,11 +4,12 @@ import { UserService } from '../../../../core/services/user-service';
 import { CommonModule } from '@angular/common';
 import { Avatar } from '../../../../shared/components/avatar/avatar';
 import { UserForm } from '../user-form/user-form';
-import { Search } from "../../../../shared/components/search/search";
+import { Search } from '../../../../shared/components/search/search';
+import { Pagination } from '../../../../shared/components/pagination/pagination';
 
 @Component({
   selector: 'app-user-list',
-  imports: [CommonModule, Avatar, UserForm, Search],
+  imports: [CommonModule, Avatar, UserForm, Search, Pagination],
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
@@ -21,6 +22,10 @@ export class UserList implements OnInit {
 
   searchTerm: string = '';
   filteredUser: User[] = [];
+
+  currentpage: number = 1;
+  pageSize: number = 10;
+  pagedUsers: User[] = [];
 
   constructor(
     private userService: UserService,
@@ -37,7 +42,9 @@ export class UserList implements OnInit {
     this.userService.getAllUsers().subscribe({
       next: (res) => {
         this.users = res;
-        this.filteredUser = res
+        this.filteredUser = res;
+        this.currentpage = 1;
+        this.updatePagedUsers();
         this.loading = false;
         this.cdr.detectChanges();
       },
@@ -54,6 +61,24 @@ export class UserList implements OnInit {
     this.filteredUser = this.users.filter((user) =>
       user.fullname.toLowerCase().includes(value.toLowerCase()),
     );
+
+    this.currentpage = 1;
+    this.updatePagedUsers();
+  }
+
+  updatePagedUsers() {
+    const start = (this.currentpage - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedUsers = this.filteredUser.slice(start, end);
+  }
+
+  onPageChange(page: number) {
+    this.currentpage = page;
+    this.updatePagedUsers();
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.pagedUsers.length / this.pageSize);
   }
 
   openAddForm() {
