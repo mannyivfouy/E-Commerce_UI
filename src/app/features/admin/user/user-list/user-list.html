@@ -29,7 +29,7 @@
 
       <tbody>
         <tr
-          *ngFor="let user of filteredUser; let i = index"
+          *ngFor="let user of pagedUsers; let i = index;"
           class="animate__animated animate__fadeInUp"
           [ngStyle]="{ 'animation-delay': i * 0.1 + 's' }"
         >
@@ -67,7 +67,17 @@
     </table>
 
     <!-- Empty -->
-    <div *ngIf="!loading && users.length === 0" class="text-center text-muted">No users found</div>
+    <div *ngIf="!loading && filteredUser.length === 0" class="text-center text-danger">No User Found</div>
+  </div>
+
+  <div class="d-flex justify-content-end me-3">
+    <app-pagination
+      [totalItems]="filteredUser.length"
+      [pageSize]="pageSize"
+      [currentPage]="currentpage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
   </div>
 </div>
 
@@ -81,7 +91,7 @@
           <h5 class="modal-title">
             {{ selectedUser ? 'Edit User' : 'Add User' }}
           </h5>
-          <button type="button" class="btn-close text-denger" (click)="closeModal(null)"></button>
+          <button type="button" class="btn-close text-danger" (click)="closeModal(null)"></button>
         </div>
 
         <!-- Body -->
