@@ -42,6 +42,32 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'products',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/admin/product/product-list/product-list').then(
+                (m) => m.ProductList,
+              ),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./features/admin/product/product-form/product-form').then(
+                (m) => m.ProductForm,
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./features/admin/product/product-form/product-form').then(
+                (m) => m.ProductForm,
+              ),
+          },
+        ],
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
