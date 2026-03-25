@@ -55,6 +55,16 @@ export class UserList implements OnInit {
     });
   }
 
+  applyFilterAndPagination() {
+    this.filteredUser = this.users.filter((user) =>
+      user.fullname.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()),
+    );
+
+    this.currentpage = 1;
+    this.updatePagedUsers();
+    this.cdr.markForCheck();
+  }
+
   onSearch(value: string) {
     this.searchTerm = value;
 
@@ -78,7 +88,7 @@ export class UserList implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.pagedUsers.length / this.pageSize);
+    return Math.ceil(this.filteredUser.length / this.pageSize);
   }
 
   openAddForm() {
@@ -109,7 +119,7 @@ export class UserList implements OnInit {
     this.userService.createUser(user).subscribe({
       next: (res) => {
         this.users.push(res);
-        this.cdr.detectChanges();
+        this.applyFilterAndPagination();
       },
       error: (err) => console.error(err),
     });
@@ -122,7 +132,8 @@ export class UserList implements OnInit {
       next: (res) => {
         const index = this.users.findIndex((u) => u._id === res._id);
         if (index !== -1) this.users[index] = res;
-        this.cdr.detectChanges();
+
+        this.applyFilterAndPagination();
       },
       error: (err) => console.error(err),
     });
@@ -136,7 +147,7 @@ export class UserList implements OnInit {
     this.userService.deleteUser(user._id).subscribe({
       next: () => {
         this.users = this.users.filter((u) => u._id !== user._id);
-        this.cdr.detectChanges();
+        this.applyFilterAndPagination();
       },
       error: (err) => console.error(err),
     });
