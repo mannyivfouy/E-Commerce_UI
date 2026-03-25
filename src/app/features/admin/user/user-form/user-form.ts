@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { User } from '../../../../models/user.model';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../../../core/services/user-service';
@@ -20,7 +20,6 @@ export class UserForm implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private cdr: ChangeDetectorRef,
   ) {}
 
   ngOnInit() {
@@ -47,7 +46,6 @@ export class UserForm implements OnInit {
         next: (res) => {
           this.loading = false;
           this.close.emit(res);
-          this.cdr.detectChanges();
         },
         error: () => {
           this.loading = false;
@@ -59,7 +57,6 @@ export class UserForm implements OnInit {
         next: (res) => {
           this.loading = false;
           this.close.emit(res);
-          this.cdr.detectChanges();
         },
         error: () => {
           this.loading = false;
