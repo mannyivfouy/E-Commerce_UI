@@ -55,6 +55,16 @@ export class UserList implements OnInit {
     });
   }
 
+  applyFilterAndPagination() {
+    this.filteredUser = this.users.filter((user) =>
+      user.fullname.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()),
+    );
+
+    // this.currentpage = 1;
+    this.updatePagedUsers();
+    this.cdr.markForCheck();
+  }
+
   onSearch(value: string) {
     this.searchTerm = value;
 
@@ -69,7 +79,7 @@ export class UserList implements OnInit {
   updatePagedUsers() {
     const start = (this.currentpage - 1) * this.pageSize;
     const end = start + this.pageSize;
-    this.pagedUsers = this.filteredUser.slice(start, end);
+    this.pagedUsers = [...this.filteredUser.slice(start, end)];
   }
 
   onPageChange(page: number) {
@@ -78,7 +88,7 @@ export class UserList implements OnInit {
   }
 
   get totalPages(): number {
-    return Math.ceil(this.pagedUsers.length / this.pageSize);
+    return Math.ceil(this.filteredUser.length / this.pageSize);
   }
 
   openAddForm() {
@@ -99,16 +109,20 @@ export class UserList implements OnInit {
         // Update existing user
         this.updateUser(result);
       } else {
-        // Add new user
         this.addUser(result);
       }
     }
+  }
+
+  trackById(index: number, user: User) {
+    return user._id;
   }
 
   addUser(user: User) {
     this.userService.createUser(user).subscribe({
       next: (res) => {
         this.users.push(res);
+        this.applyFilterAndPagination();
         this.cdr.detectChanges();
       },
       error: (err) => console.error(err),
@@ -120,8 +134,9 @@ export class UserList implements OnInit {
 
     this.userService.updateUser(this.selectedUser._id, user).subscribe({
       next: (res) => {
-        const index = this.users.findIndex((u) => u._id === res._id);
-        if (index !== -1) this.users[index] = res;
+        this.users = this.users.map((u) => (u._id === res._id ? res : u));
+
+        this.applyFilterAndPagination();
         this.cdr.detectChanges();
       },
       error: (err) => console.error(err),
@@ -136,7 +151,7 @@ export class UserList implements OnInit {
     this.userService.deleteUser(user._id).subscribe({
       next: () => {
         this.users = this.users.filter((u) => u._id !== user._id);
-        this.cdr.detectChanges();
+        this.applyFilterAndPagination();
       },
       error: (err) => console.error(err),
     });
