@@ -1,6 +1,12 @@
 <div class="card shadow-sm animate__animated animate__fadeIn">
   <div class="card-header d-flex justify-content-between align-items-center">
     <h5 class="mb-0">Product List</h5>
+
+    <app-search (searchChange)="onSearch($event)"></app-search>
+
+    <button class="btn btn-primary">
+      <i class="bi bi-box-fill me-2"></i> Add Product
+    </button>
   </div>
 
   <div class="card-body">
@@ -24,7 +30,7 @@
 
       <tbody>
         <tr
-          *ngFor="let product of products; let i = index"
+          *ngFor="let product of filteredProduct; let i = index"
           class="animate__animated animate__fadeInUp"
           [ngStyle]="{ 'animation-delay': i * 0.1 + 's' }"
         >
@@ -68,5 +74,19 @@
         </tr>
       </tbody>
     </table>
+
+    <div *ngIf="!loading && filteredProduct.length === 0" class="text-center text-danger">
+      No Product Found
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end me-3">
+    <app-pagination
+      [totalItems]="filteredProduct.length"
+      [pageSize]="pageSize"
+      [currentPage]="currentPage"
+      (pageChange)="onPageChange($event)"
+    >
+    </app-pagination>
   </div>
 </div>
