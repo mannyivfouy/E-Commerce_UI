@@ -33,7 +33,7 @@
           class="animate__animated animate__fadeInUp"
           [ngStyle]="{ 'animation-delay': i * 0.1 + 's' }"
         >
-          <td>{{ i + 1 }}</td>
+          <td>{{ (currentPage - 1) * pageSize + i + 1 }}</td>
           <td><app-avatar [fullName]="user.fullname"></app-avatar></td>
           <td>{{ user.fullname }}</td>
           <td>{{ user.email }}</td>
