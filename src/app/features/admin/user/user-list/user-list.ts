@@ -23,7 +23,7 @@ export class UserList implements OnInit {
   searchTerm: string = '';
   filteredUser: User[] = [];
 
-  currentpage: number = 1;
+  currentPage: number = 1;
   pageSize: number = 10;
   pagedUsers: User[] = [];
 
@@ -43,7 +43,7 @@ export class UserList implements OnInit {
       next: (res) => {
         this.users = res;
         this.filteredUser = res;
-        this.currentpage = 1;
+        this.currentPage = 1;
         this.updatePagedUsers();
         this.loading = false;
         this.cdr.detectChanges();
@@ -60,7 +60,7 @@ export class UserList implements OnInit {
       user.fullname.toLocaleLowerCase().includes(this.searchTerm.toLocaleLowerCase()),
     );
 
-    // this.currentpage = 1;
+    // this.currentPage = 1;
     this.updatePagedUsers();
     this.cdr.markForCheck();
   }
@@ -72,18 +72,18 @@ export class UserList implements OnInit {
       user.fullname.toLowerCase().includes(value.toLowerCase()),
     );
 
-    this.currentpage = 1;
+    this.currentPage = 1;
     this.updatePagedUsers();
   }
 
   updatePagedUsers() {
-    const start = (this.currentpage - 1) * this.pageSize;
+    const start = (this.currentPage - 1) * this.pageSize;
     const end = start + this.pageSize;
     this.pagedUsers = [...this.filteredUser.slice(start, end)];
   }
 
   onPageChange(page: number) {
-    this.currentpage = page;
+    this.currentPage = page;
     this.updatePagedUsers();
   }
 
