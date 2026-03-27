@@ -68,6 +68,32 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'categories',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/admin/categoty/categoty-list/categoty-list').then(
+                (m) => m.CategotyList,
+              ),
+          },
+          {
+            path: 'create',
+            loadComponent: () =>
+              import('./features/admin/categoty/categoty-form/categoty-form').then(
+                (m) => m.CategotyForm,
+              ),
+          },
+          {
+            path: 'edit/:id',
+            loadComponent: () =>
+              import('./features/admin/categoty/categoty-form/categoty-form').then(
+                (m) => m.CategotyForm,
+              ),
+          },
+        ],
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
