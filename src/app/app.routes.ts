@@ -69,7 +69,7 @@ export const routes: Routes = [
         ],
       },
       {
-        path: 'categoty',
+        path: 'categories',
         children: [
           {
             path: '',
