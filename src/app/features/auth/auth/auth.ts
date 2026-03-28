@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth-service';
 import { CommonModule } from '@angular/common';
@@ -7,7 +13,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './auth.html',
   styleUrl: './auth.css',
 })
@@ -23,6 +29,7 @@ export class Auth {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
+    private cdr: ChangeDetectorRef,
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -65,10 +72,12 @@ export class Auth {
         this.router.navigate([role === 'admin' ? '/admin' : '/client']);
 
         this.loading = false;
+        // this.cdr.detectChanges();
       },
       error: (err) => {
         this.errorMessage = err.error?.message || 'Login Failed';
         this.loading = false;
+        this.cdr.detectChanges();
       },
     });
   }
