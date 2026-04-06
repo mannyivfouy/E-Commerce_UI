@@ -3,10 +3,11 @@ import { Category } from '../../../../models/category.model';
 import { CategoryService } from '../../../../core/services/category-service';
 import { Search } from "../../../../shared/components/search/search";
 import { CommonModule } from '@angular/common';
+import { Pagination } from "../../../../shared/components/pagination/pagination";
 
 @Component({
   selector: 'app-categoty-list',
-  imports: [Search, CommonModule],
+  imports: [Search, CommonModule, Pagination],
   templateUrl: './categoty-list.html',
   styleUrl: './categoty-list.css',
 })
@@ -55,6 +56,9 @@ export class CategotyList implements OnInit{
     this.filteredCategory = this.categories.filter((category) =>
       category.categoryName.toLocaleLowerCase().includes(value.toLocaleLowerCase()),
     )
+
+    this.currentPage = 1;
+    this.updatePagedCategories();
   }
 
   updatePagedCategories(){
@@ -63,8 +67,8 @@ export class CategotyList implements OnInit{
     this.pagedCategories = [...this.filteredCategory.slice(start, end)]
   }
 
-  onPageChange(){
-    this.currentPage = this.pageSize;
+  onPageChange(page: number){
+    this.currentPage = page;
     this.updatePagedCategories();
   }
 
