@@ -1,4 +1,27 @@
-<div class="container animate__animated animate__fadeIn">
-  <p>dashbord work!</p>
-</div>
+<div class="row" *ngIf="stats">
 
+  <div class="col-md-4">
+    <app-stat-card
+      title="Total Users"
+      [value]="stats.totalUsers"
+      color="primary">
+    </app-stat-card>
+  </div>
+
+  <div class="col-md-4">
+    <app-stat-card
+      title="Products"
+      [value]="stats.totalProducts"
+      color="success">
+    </app-stat-card>
+  </div>
+
+  <div class="col-md-4">
+    <app-stat-card
+      title="Categories"
+      [value]="stats.totalCategories"
+      color="warning">
+    </app-stat-card>
+  </div>
+
+</div>
