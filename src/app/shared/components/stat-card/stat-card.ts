@@ -10,5 +10,5 @@ import { Component, Input } from '@angular/core';
 export class StatCard {
   @Input() title!: string;
   @Input() value!: number;
-  @Input() color: string = 'primary';
+  @Input() icon: string = 'bi bi-chart';
 }

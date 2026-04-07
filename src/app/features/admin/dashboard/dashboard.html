@@ -1,27 +1,29 @@
-<div class="row" *ngIf="stats">
+<div class="card shadow-sm animate__animated animate__fadeIn p-4">
+  <div class="row g-3 " *ngIf="stats">
 
   <div class="col-md-4">
     <app-stat-card
       title="Total Users"
       [value]="stats.totalUsers"
-      color="primary">
+      icon="bi-people-fill">
     </app-stat-card>
   </div>
 
   <div class="col-md-4">
     <app-stat-card
-      title="Products"
+      title="Total Products"
       [value]="stats.totalProducts"
-      color="success">
+      icon="bi-box-fill">
     </app-stat-card>
   </div>
 
   <div class="col-md-4">
     <app-stat-card
-      title="Categories"
+      title="Total Categories"
       [value]="stats.totalCategories"
-      color="warning">
+      icon="bi-tag">
     </app-stat-card>
   </div>
 
+</div>
 </div>
