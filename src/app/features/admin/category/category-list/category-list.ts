@@ -1,18 +1,18 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Category } from '../../../../models/category.model';
 import { CategoryService } from '../../../../core/services/category-service';
-import { Search } from "../../../../shared/components/search/search";
 import { CommonModule } from '@angular/common';
-import { Pagination } from "../../../../shared/components/pagination/pagination";
+import { Pagination } from '../../../../shared/components/pagination/pagination';
+import { Search } from '../../../../shared/components/search/search';
 
 @Component({
-  selector: 'app-categoty-list',
-  imports: [Search, CommonModule, Pagination],
-  templateUrl: './categoty-list.html',
-  styleUrl: './categoty-list.css',
+  selector: 'app-category-list',
+  imports: [CommonModule, Pagination, Search],
+  templateUrl: './category-list.html',
+  styleUrl: './category-list.css',
 })
-export class CategotyList implements OnInit{
-  categories: Category[] = [];
+export class CategoryList implements OnInit{
+   categories: Category[] = [];
   loading: boolean = false;
 
   searchTerm: string = '';
@@ -23,7 +23,7 @@ export class CategotyList implements OnInit{
   pagedCategories: Category[] = [];
 
   constructor(
-    private categoryService: CategoryService,
+    private categoryService : CategoryService,
     private cdr: ChangeDetectorRef,
   ) {}
 
