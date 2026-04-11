@@ -1,3 +1,4 @@
+/* Sidebar */
 .modern-sidebar {
   width: 260px;
   height: calc(100vh - 20px);
@@ -13,37 +14,59 @@
   height: 50px;
 }
 
-/* Links */
-.modern-sidebar .nav-link {
-  color: #495057;
-  border-radius: 10px;
-  padding: 10px 14px;
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* Hover */
-.modern-sidebar .nav-link:hover {
-  background: #f8f9fa;
-}
-
-/* Active */
-.modern-sidebar .nav-link.active {
-  background: #eef2ff;
-  color: #4f46e5;
+/* Wrapper (important for positioning) */
+.sidebar-menu-wrapper {
   position: relative;
 }
 
-/* Accent bar */
-.modern-sidebar .nav-link.active::before {
-  content: '';
+/* 🔥 Sliding blue background */
+.active-bg {
   position: absolute;
-  left: -6px;
-  top: 20%;
-  height: 60%;
-  width: 4px;
-  border-radius: 4px;
-  background: #4f46e5;
+  top: 0; /* important */
+  left: 8px;
+  width: calc(100% - 16px);
+  height: 44px;
+
+  background: linear-gradient(90deg, #4f46e5, #6366f1);
+  border-radius: 10px;
+
+  transition: all 0.35s ease;
+  z-index: 0;
+}
+
+/* Menu */
+.sidebar-menu {
+  position: relative;
+  z-index: 1;
+}
+
+/* List spacing fix */
+.sidebar-menu li {
+  list-style: none;
+}
+
+/* Links */
+.nav-link {
+  display: block;
+  padding: 10px 14px;
+  border-radius: 10px;
+
+  color: #495057;
+  font-weight: 500;
+
+  position: relative;
+  z-index: 1;
+
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.nav-link:hover {
+  transform: translateX(6px);
+}
+
+.nav-link.active {
+  color: #ffffff;
 }
 
 /* Logout */
@@ -54,4 +77,5 @@
 
 .logout:hover {
   background: #fff5f5;
+  transform: translateX(6px);
 }
