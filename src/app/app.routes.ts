@@ -74,22 +74,22 @@ export const routes: Routes = [
           {
             path: '',
             loadComponent: () =>
-              import('./features/admin/categoty/categoty-list/categoty-list').then(
-                (m) => m.CategotyList,
+              import('./features/admin/category/category-list/category-list').then(
+                (m) => m.CategoryList,
               ),
           },
           {
             path: 'create',
             loadComponent: () =>
-              import('./features/admin/categoty/categoty-form/categoty-form').then(
-                (m) => m.CategotyForm,
+              import('./features/admin/category/category-form/category-form').then(
+                (m) => m.CategoryForm,
               ),
           },
           {
             path: 'edit/:id',
             loadComponent: () =>
-              import('./features/admin/categoty/categoty-form/categoty-form').then(
-                (m) => m.CategotyForm,
+              import('./features/admin/category/category-form/category-form').then(
+                (m) => m.CategoryForm,
               ),
           },
         ],
