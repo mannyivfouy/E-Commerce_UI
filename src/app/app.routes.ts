@@ -94,6 +94,11 @@ export const routes: Routes = [
           },
         ],
       },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./features/admin/order-list/order-list').then((m) => m.OrderList),
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },
