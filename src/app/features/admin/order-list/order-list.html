@@ -1,1 +1,73 @@
-<p>order works!</p>
+<div class="card shadow-sm animate__animated animate__fadeIn">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0">Order List</h5>
+
+    <app-search (searchChange)="onSearch($event)"></app-search>
+  </div>
+
+  <div class="card-body">
+    <div *ngIf="loading" class="text-center">Loading...</div>
+    <table class="table table-hover" *ngIf="!loading">
+      <thead class="table-light text">
+        <tr>
+          <th>#</th>
+          <th>User</th>
+          <th>Total Item</th>
+          <th>Item Detail</th>
+          <th>Total Price</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          *ngFor="let order of filteredOrder; let i = index"
+          class="animate__animated animate__fadeInUp"
+          [ngStyle]="{ 'animation-delay': i * 0.1 + 's' }"
+        >
+          <td>{{ i + 1 }}</td>
+          <td>
+            <div>
+              {{ typeof order.user === 'string' ? order.user : order.user.fullname }}
+            </div>
+          </td>
+          <td>{{ order.items.length }}</td>
+          <td>
+            <div *ngFor="let item of order.items">
+              {{ typeof item.product === 'string' ? item.product : item.product.productName }}
+              <small class="text-muted fw-bold"> x {{item.quantity}}</small>
+            </div>
+          </td>
+          <td>{{ order.totalPrice | currency }}</td>
+          <td>
+            <span
+              class="badge"
+              [ngClass]="{
+                'bg-warning': order.status === 'Pending',
+                'bg-success': order.status === 'Paid',
+                'bg-danger': order.status === 'Canceled',
+              }"
+            >
+              {{ order.status }}
+            </span>
+          </td>
+          <td>{{ order.createdAt | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="!loading && filteredOrder.length === 0" class="text-center text-danger">
+      No Order Found
+    </div>
+
+    <div class="d-flex justify-content-end me-3">
+      <app-pagination
+        [totalItems]="filteredOrder.length"
+        [pageSize]="pageSize"
+        [currentPage]="currentPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    </div>
+  </div>
+</div>

@@ -1,12 +1,15 @@
+import { Product } from "./product.model";
+import { User } from "./user.model";
+
 export interface OrderItem {
-  product: string;
+  product: string | Product;
   quantity: number;
   price: number;
 }
 
 export interface Order {
   _id?: string;
-  user: string;
+  user: string | User;
   items: OrderItem[];
   totalPrice: number;
   status?: 'Pending' | 'Paid' | 'Canceled';
